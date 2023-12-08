@@ -27,7 +27,7 @@ export default function Login() {
         setLoginError(data.message || 'Login failed');
       }
     } catch (error) {
-      setLoginError('Failed to connect to the server.');
+      setLoginError('');
     }
   };
 
