@@ -1,0 +1,38 @@
+.bruh {
+    overflow : scroll;
+    height: 100vh;
+  }
+.market-container {
+    
+    
+    width: 100%;
+    max-width: 1500px;
+    height: auto;
+    scroll-behavior: smooth;
+    padding: 2rem;
+    background-color: #f7f7f7; /* reverted to the original color */
+    margin: 0 auto;
+}
+
+.market-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.filter-button {
+    background-color: #4CAF50; /* green for agriculture feel */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+    background-color: #388E3C; /* darker green on hover */
+}
+
+
+

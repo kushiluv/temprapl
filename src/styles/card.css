@@ -1,0 +1,12 @@
+.card {
+    width: 400px; /* Set a fixed width */
+    height: 700px; /* Set a fixed height */
+    /* Other styles */
+}
+
+.card--image {
+    width: 100%; /* Make the image take the full width of the card */
+    height: 350px; /* Set a fixed height for the image */
+    object-fit: cover; /* This will make sure the image covers the area without distorting */
+    /* Other styles */
+}

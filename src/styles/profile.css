@@ -1,0 +1,165 @@
+/* Reset margins and paddings for consistency */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%; /* Ensure the html and body tags span the full height of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin: 0; /* Reset default margins */
+  padding: 0; /* Reset default padding */
+}
+.bruuh {
+  overflow : scroll;
+  height: 100vh;
+}
+/* Profile Container */
+.profile-container {
+
+  font-family: 'Arial', sans-serif;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+}
+
+/* Navbar Placeholder for Demo */
+.navbar {
+  background: #4CAF50;
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+/* Headings and Text Styles */
+.profile-container h1,
+.profile-container h2 {
+  color: #333;
+  font-weight: 300;
+}
+
+.profile-container h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #4CAF50;
+}
+
+.profile-container h2 {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  color: #555;
+}
+
+/* Profile Picture Styling */
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 1rem;
+  border: 3px solid #4CAF50;
+}
+
+/* Button Styling */
+.button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #367c39;
+}
+
+.cancel-button {
+  background-color: #f44336;
+}
+
+.cancel-button:hover {
+  background-color: #d73833;
+}
+
+/* Input and Label Styling */
+.profile-container label {
+  display: block;
+  margin-top: 1rem;
+  color: #666;
+}
+
+.profile-container input[type='text'],
+.profile-container input[type='email'],
+.profile-container input[type='date'],
+.profile-container input[type='tel'],
+.profile-container input[type='file'] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Collapsible Sections */
+.collapsible-section {
+  margin-top: 2rem;
+}
+
+.collapsible-section .trigger {
+  padding: 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f7f7f7;
+  color: #333;
+  cursor: pointer;
+}
+
+.collapsible-section .content {
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+/* Product Details Styling */
+.product-details {
+  display: grid;
+  grid-template-columns: 100px auto;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.product-details img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1rem;
+  }
+}
+
+/* Error and Loading Message Styling */
+.profile-error,
+.profile-loading {
+  background-color: #ffefef;
+  color: #d32f2f;
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+  border-radius: 5px;
+}

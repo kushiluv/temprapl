@@ -1,0 +1,70 @@
+.sell-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.1);
+  }
+  
+  .sell-container h1 {
+    text-align: center;
+    color: #008000;
+    margin-bottom: 1.5rem;
+  }
+  
+  .sell-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sell-container form input[type='text'],
+  .sell-container form input[type='number'],
+  .sell-container form textarea {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .sell-container form textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .sell-container form input[type='file'] {
+    margin-bottom: 1rem;
+  }
+  
+  .sell-container button {
+    padding: 0.5rem 1rem;
+    background-color: #008000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sell-container button:hover {
+    background-color: #006400;
+  }
+  
+  /* Additional responsiveness for smaller devices */
+  @media (max-width: 768px) {
+    .sell-container {
+      margin: 1rem;
+      padding: 1rem;
+    }
+  
+    .sell-container form input[type='text'],
+    .sell-container form input[type='number'],
+    .sell-container form textarea {
+      padding: 0.5rem;
+    }
+  
+    .sell-container button {
+      padding: 0.5rem;
+    }
+  }
+  
