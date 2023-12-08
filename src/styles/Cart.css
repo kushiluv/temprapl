@@ -84,3 +84,8 @@ button:hover {
 .place-order-button:hover {
     opacity: 0.8;
 }
+.cart-container img {
+    max-width: 100px;  /* Set the maximum width */
+    max-height: 100px; /* Set the maximum height */
+    object-fit: cover; /* This makes sure to keep the aspect ratio of the image */
+}

@@ -1,34 +1,26 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Auth.css';
-import axios from 'axios';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
-  const navigate = useNavigate(); // useNavigate instead of useHistory
+  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     setLoginError('');
 
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { email, password });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Handle successful authentication
-        console.log(data.message);
-        navigate('/'); // Use navigate instead of history.push
-      } else {
-        // Handle failed authentication
-        setLoginError(data.message || 'Login failed');
-      }
-    } catch (error) {
-      setLoginError('Failed to connect to the server.');
-    }
+    // Hardcoded credentials check
+    if (email === 'abhinn@gmail.com' && password === 'pass') {
+      console.log("Logged in successfully");
+      const userData = { username: "abhinn" };
+      localStorage.setItem("user", JSON.stringify(userData)); // Save user data to local storage
+      navigate('/'); // Navigate to the home page on successful login
+  } else {
+      setLoginError('Invalid email or password.');
+  }
   };
 
   return (

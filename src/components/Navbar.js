@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
-
     useEffect(() => {
-        (async function checkSession() {
-            try {
-                const response = await fetch('/session');
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log(data);
-                    setUser(data);
-                } else {
-                    setUser(null);
-                }
-            } catch (error) {
-                console.error("Error checking session:", error);
-            }
-        })();
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
     }, []);
+    // Simulate a user login with hardcoded values
+    const loginUser = () => {
+        
+        setUser({ username: "abhinn" });
+        
+    };
+
+    // Simulate user logout
+    const logoutUser = () => {
+        setUser(null);
+        localStorage.removeItem("user"); // Clear user data from local storage
+        navigate("/login"); // Navigate to the login page after logout
+    };
+
     const handleLogoClick = () => {
         navigate("/");
     };
+
     const handleListAnItemClick = () => {
         if (user) {
             navigate("/sell");
@@ -31,8 +35,10 @@ export default function Navbar() {
             navigate("/login");
         }
     };
+
     const handleLoginClick = () => {
         navigate("/login");
+        
     };
 
     const handleRegisterClick = () => {
@@ -51,16 +57,8 @@ export default function Navbar() {
         navigate("/cart");
     };
 
-    const handleLogoutClick = async () => {
-        try {
-            const response = await fetch('/logout', { method: 'POST' });
-            if (response.ok) {
-                setUser(null);
-                navigate("/");
-            }
-        } catch (error) {
-            console.error("Logout failed:", error);
-        }
+    const handleLogoutClick = () => {
+        logoutUser(); // Simulate logout
     };
 
     return (
@@ -69,11 +67,11 @@ export default function Navbar() {
                 <img 
                     src="../images/airbnb-logo.png" 
                     className="nav--logo" 
-                    alt="Airbnb Logo" 
+                    alt="Logo" 
                     onClick={handleLogoClick}
                 />
                 <button className="login-button" onClick={handleMarketClick}>Market</button>
-                <button className="login-button" onClick={handleListAnItemClick}>List an Item</button> {/* New button */}
+                <button className="login-button" onClick={handleListAnItemClick}>List an Item</button>
             </div>
             <div className="login">
                 {user ? (

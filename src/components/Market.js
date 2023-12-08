@@ -5,11 +5,16 @@ import Navbar from '../components/Navbar';
 import data from "../data"; // Import data from data.js
 
 export default function Market() {
-    
-    const [products, setProducts] = useState(data); // Initialize products with data from data.js
+    const [products] = useState(data);
     const [filter, setFilter] = useState("");
 
-    // Rest of your sorting logic remains the same
+    // Add function to handle adding to cart
+    const addToCart = (product) => {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(`${product.title} added to cart.`);
+    };
 
     let filteredData = [...products];
 
@@ -34,8 +39,8 @@ export default function Market() {
 
     const cards = filteredData.map(item => {
         return (
-            <li className="market-item" key={item._id}>
-                <MarketCard {...item} />
+            <li className="market-item" key={item.id}>
+                <MarketCard {...item} addToCart={() => addToCart(item)} />
             </li>
         );
     });
