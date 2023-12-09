@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    networks:
+      - my-network
+
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - my-network
+    depends_on:
+      - flask-app
+
+networks:
+  my-network:

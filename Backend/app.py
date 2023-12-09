@@ -6,7 +6,6 @@ import certifi
 import pymongo
 import json
 import time
-import pandas as pd
 import math
 import numpy as np
 import pandas as pd
@@ -18,7 +17,7 @@ from flask_cors import CORS
 from pymongo import MongoClient
 import certifi
 import razorpay
-app = Flask(__name__, static_folder='../build', static_url_path='')
+app = Flask(__name__)
 CORS(app)  # This will enable CORS for all routes
 app.secret_key = 'your_secret_keysadf' 
 # Define a route to list all collections
@@ -43,8 +42,10 @@ fs = gridfs.GridFS(db)
 @app.route('/image/<image_id>')
 def serve_image(image_id):
     try:
-        # Use the image_id to retrieve the file from GridFS
         image_file = fs.get(ObjectId(image_id))
+        image_url = url_for('serve_image', image_id=image_id, _external=True)
+        print(f"Serving image at URL: {image_url}")
+        app.logger.info(f"Serving image at URL: {image_url}")
         response = make_response(image_file.read())
         response.mimetype = image_file.content_type
         return response
@@ -193,14 +194,14 @@ def register():
 
 @app.route('/login', methods=['POST'])
 def login():
-    print("in")
+    print("inninininininninninin")
     try:
         data = request.json
         email = data.get('email')
         password = data.get('password')
-        print("finding_mail")
+        
         farmer = rapl_db["Farmer"].find_one({"Email": email})
-        print(farmer)
+        #print(farmer)
         if farmer and farmer.get("pswd") == password:
             if not farmer.get("isApproved", False):
                 return jsonify({"status": "fail", "message": "Account not approved"}), 403
@@ -257,7 +258,7 @@ def get_cart_items():
                 item['product_name'] = product.get('title', 'No title')
                 # Convert coverImg ObjectId to a URL
                 if 'coverImg' in product and isinstance(product['coverImg'], ObjectId):
-                    item['coverImg'] = url_for('serve_image', image_id=str(product['coverImg']), _external=True)
+                    item['coverImg'] = url_for('serve_image', image_id=str(product['coverImg']))
                 else:
                     item['coverImg'] = 'No image'
             
@@ -371,7 +372,8 @@ def get_products():
         for product in products_list:
             product['_id'] = str(product['_id'])  # Convert ObjectId to string
             if 'coverImg' in product and isinstance(product['coverImg'], ObjectId):
-                product['coverImg'] = url_for('serve_image', image_id=str(product['coverImg']), _external=True)
+                product['coverImg'] = url_for('serve_image', image_id=str(product['coverImg']))
+            print("image : ",product['coverImg'])
         return jsonify(products_list)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -482,7 +484,7 @@ def get_user_listed_products():
         for product in products:
             product['_id'] = str(product['_id']) 
             if 'coverImg' in product and isinstance(product['coverImg'], ObjectId):
-                product['coverImg'] = url_for('serve_image', image_id=str(product['coverImg']), _external=True)
+                product['coverImg'] = url_for('serve_image', image_id=str(product['coverImg']))
             print(product['_id'])
         return jsonify(products)
     except Exception as e:
@@ -501,7 +503,7 @@ def get_unapproved_products():
         for product in unapproved_products:
             product['_id'] = str(product['_id'])
             if 'coverImg' in product and isinstance(product['coverImg'], ObjectId):
-                product['coverImg'] = url_for('serve_image', image_id=str(product['coverImg']), _external=True)
+                product['coverImg'] = url_for('serve_image', image_id=str(product['coverImg']))
         return jsonify(unapproved_products)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -534,11 +536,11 @@ def get_unapproved_users():
         
         for user in unapproved_users_list:
             if 'picture_id' in user and isinstance(user['picture_id'], ObjectId):
-                user['picture_id'] = url_for('serve_image', image_id=str(user['picture_id']), _external=True)
+                user['picture_id'] = url_for('serve_image', image_id=str(user['picture_id']))
             user['_id'] = str(user['_id'])  # Convert ObjectId to string
         return jsonify(unapproved_users_list)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(use_reloader=True, port=5000, threaded=True)
+    app.run(host='0.0.0.0', port=5000)

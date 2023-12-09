@@ -1,40 +1,18 @@
-import React, { useState } from "react";
-import '../styles/card.css';
+import React, { useState } from "react"
+
 export default function Card(props) {
-    let badgeText;
+    let badgeText
     if (props.openSpots === 0) {
-        badgeText = "SOLD OUT";
+        badgeText = "SOLD OUT"
     } else if (props.location === "Online") {
-        badgeText = "ONLINE";
+        badgeText = "ONLINE"
     }
 
     const [quantity, setQuantity] = useState(1);
 
-    const addToCart = async () => {
+    const addToCart = () => {
         console.log(`Added product ${props.id} with quantity ${quantity} to cart.`);
-        // Assuming a similar backend API structure as in MarketCard
-        const productToAdd = { product_id: props.id, quantity: quantity };
-        try {
-            const response = await fetch('/cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(productToAdd),
-                credentials: 'include'
-            });
-
-            if (response.status === 401) {
-                window.location.href = '/login';
-            } else if (response.ok) {
-                alert('Added to cart!');
-            } else {
-                const errorData = await response.json();
-                alert(`Failed to add to cart: ${errorData.error}`);
-            }
-        } catch (error) {
-            console.error('Error adding to cart:', error);
-        }
+        // Implement the actual add to cart logic here
     };
 
     return (
@@ -48,27 +26,26 @@ export default function Card(props) {
                 className="card--image" 
                 alt={props.title} 
             />
-            <div className="card--details">
-               <strong> <p className="card--title">{props.title}</p></strong>
-                <p className="card--description">{props.description}</p>
-                <p className="card--price">
-                    <span className="bold">Rs. {props.price}</span>
-                </p>
-                <p className="card--stock">
-                    {props.openSpots > 0 ? 'In Stock' : 'Out of Stock'}
-                </p>
-                <div className="card-actions">
-                    <button onClick={addToCart}>Add to Cart</button>
-                    <input 
-                        type="number" 
-                        min="1" 
-                        max={props.openSpots} // Use openSpots for max quantity
-                        value={quantity} 
-                        onChange={(e) => setQuantity(Number(e.target.value))} 
-                        className="quantity-input"
-                    />
-                </div>
+            <div className="card--stats">
+                <img src="../images/star.png" className="card--star" alt="star-icon" />
+                <span>{props.stats.rating}</span>
+                <span className="gray">({props.stats.reviewCount}) • </span>
+                <span className="gray">{props.location}</span>
+            </div>
+            <p className="card--title">{props.title}</p>
+            <p className="card--price">
+                <span className="bold">From ${props.price}</span> / person
+            </p>
+            <div className="card-actions">
+                <button onClick={addToCart}>Add to Cart</button>
+                <select value={quantity} onChange={(e) => setQuantity(e.target.value)}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </div>
         </div>
-    );
+    )
 }

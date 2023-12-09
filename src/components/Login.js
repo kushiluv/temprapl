@@ -6,21 +6,34 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // useNavigate instead of useHistory
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setLoginError('');
 
-    // Hardcoded credentials check
-    if (email === 'abhinn@gmail.com' && password === 'pass') {
-      console.log("Logged in successfully");
-      const userData = { username: "abhinn" };
-      localStorage.setItem("user", JSON.stringify(userData)); // Save user data to local storage
-      navigate('/'); // Navigate to the home page on successful login
-  } else {
-      setLoginError('Invalid email or password.');
-  }
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+    
+      const data = await response.json();
+    
+      if (response.ok) {
+        console.log(data.message);
+        navigate('/');
+      } else {
+        console.log("Response not OK", data);
+        setLoginError(data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error("Fetch error", error);
+      setLoginError('Failed to connect to the server.');
+    }
   };
 
   return (

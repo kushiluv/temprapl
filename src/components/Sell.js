@@ -56,7 +56,7 @@ function Sell() {
     }
     
     try {
-      const response = await axios.post('/sell', formData, {
+      const response = await axios.post('/api/sell', formData, {
         withCredentials: true, // Important if you're using sessions
       });
       console.log(response.data);

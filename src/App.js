@@ -38,9 +38,6 @@ export default function App() {
         <div className="scroll-section">
           <Hero />
         </div>
-        <div className="scroll-section">
-          <Sampleitems />
-        </div>
       </div>
     );
   }
