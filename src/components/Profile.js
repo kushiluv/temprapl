@@ -22,7 +22,7 @@ export default function Profile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('/api/session');
+        const response = await fetch('/https://ritflaskapp.azurewebsites.net/session');
         if (!response.ok) throw new Error('Failed to fetch user session');
         const data = await response.json();
         if (data.is_authenticated) {
@@ -42,7 +42,7 @@ export default function Profile() {
     };
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('/api/user/orders'); // Adjust endpoint as needed
+        const response = await axios.get('/https://ritflaskapp.azurewebsites.net/user/orders'); // Adjust endpoint as needed
         setOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -52,7 +52,7 @@ export default function Profile() {
     // Fetch listed products
     const fetchListedProducts = async () => {
       try {
-        const response = await axios.get('/api/user/listed-products'); // Adjust endpoint as needed
+        const response = await axios.get('/https://ritflaskapp.azurewebsites.net/user/listed-products'); // Adjust endpoint as needed
         setListedProducts(response.data);
         console.log(response.data);
       } catch (error) {

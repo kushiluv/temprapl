@@ -41,7 +41,7 @@ function RRegister() {
     }
 
     try {
-      const response = await fetch('/api/register', {
+      const response = await fetch('/https://ritflaskapp.azurewebsites.net/register', {
         method: 'POST',
         body: formData
       });

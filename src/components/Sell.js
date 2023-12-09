@@ -56,7 +56,7 @@ function Sell() {
     }
     
     try {
-      const response = await axios.post('/api/sell', formData, {
+      const response = await axios.post('/https://ritflaskapp.azurewebsites.net/sell', formData, {
         withCredentials: true, // Important if you're using sessions
       });
       console.log(response.data);

@@ -8,7 +8,7 @@ export default function Navbar() {
     useEffect(() => {
         (async function checkSession() {
             try {
-                const response = await fetch('/api/session');
+                const response = await fetch('/https://ritflaskapp.azurewebsites.net/session');
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data);
@@ -53,7 +53,7 @@ export default function Navbar() {
 
     const handleLogoutClick = async () => {
         try {
-            const response = await fetch('/api/logout', { method: 'POST' });
+            const response = await fetch('/https://ritflaskapp.azurewebsites.net/logout', { method: 'POST' });
             if (response.ok) {
                 setUser(null);
                 navigate("/");

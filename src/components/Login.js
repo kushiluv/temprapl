@@ -13,7 +13,7 @@ export default function Login() {
     setLoginError('');
 
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("/https://ritflaskapp.azurewebsites.net/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

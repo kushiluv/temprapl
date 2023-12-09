@@ -8,7 +8,7 @@ export default function MarketCard(props) {
         console.log(props._id);
         const productToAdd = { product_id: props._id, quantity: quantity };
         // Check for user authentication status before adding to cart
-        const response = await fetch('/api/cart', {
+        const response = await fetch('/https://ritflaskapp.azurewebsites.net/cart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

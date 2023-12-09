@@ -28,7 +28,7 @@ export default function Cart() {
         loadScript('https://checkout.razorpay.com/v1/checkout.js');
         const fetchCartItems = async () => {
             try {
-                const response = await fetch('/api/cart', {
+                const response = await fetch('/https://ritflaskapp.azurewebsites.net/cart', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export default function Cart() {
     
         // Call backend to create an order
         try {
-            const response = await fetch('/api/create_order', {
+            const response = await fetch('/https://ritflaskapp.azurewebsites.net/create_order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

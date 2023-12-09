@@ -10,7 +10,7 @@ export default function Market() {
     useEffect(() => {
         // Fetch the products when the component mounts
         const fetchProducts = async () => {
-            const response = await fetch('/api/products');
+            const response = await fetch('/https://ritflaskapp.azurewebsites.net/products');
             if (response.ok) {
                 const data = await response.json();
                 setProducts(data);

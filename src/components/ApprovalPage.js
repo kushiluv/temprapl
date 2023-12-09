@@ -10,7 +10,7 @@ function ApprovalPage() {
   useEffect(() => {
     const checkAuthentication = async () => {
         try {
-            const sessionResponse = await axios.get('/api/session');
+            const sessionResponse = await axios.get('/https://ritflaskapp.azurewebsites.net/session');
             if (sessionResponse.data.is_authenticated) {
                 setIsAuthenticated(true);
                 fetchUnapprovedUsers();
@@ -26,7 +26,7 @@ function ApprovalPage() {
     // Fetch unapproved products
     const fetchUnapprovedUsers = async () => {
         try {
-            const response = await axios.get('/api/users/unapproved');
+            const response = await axios.get('/https://ritflaskapp.azurewebsites.net/users/unapproved');
             setUnapprovedUsers(response.data);
         } catch (error) {
             console.error('Error fetching unapproved users', error);
@@ -34,7 +34,7 @@ function ApprovalPage() {
     };
     const fetchUnapprovedProducts = async () => {
         try {
-          const response = await axios.get('/api/products/unapproved');
+          const response = await axios.get('/https://ritflaskapp.azurewebsites.net/products/unapproved');
           console.log("Response data:", response.data); // Log the response data
           setUnapprovedProducts(response.data);
         } catch (error) {
